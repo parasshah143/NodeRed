@@ -1,0 +1,60 @@
+sudo sh -c "echo 'deb [arch=armhf] http://repos.rcn-ee.net/debian wheezy main' >> /etc/apt/sources.list"
+
+sudo sh -c "echo '#deb-src [arch=armhf] http://repos.rcn-ee.net/debian wheezy main' >> /etc/apt/sources.list"
+
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install npm --reinstall
+
+ntpdate -b -s -u pool.ntp.org  (to update time on beaglebone)
+
+sudo apt-get install nodejs  
+
+sudo npm install -g --unsafe-perm node-red 
+
+debian@beaglebone:~$ cd ~/.node-red  
+
+debian@beaglebone:~/.node-red$ sudo apt-get install libbluetooth-dev 
+
+debian@beaglebone:~/.node-red$ sudo npm install -g sensortag 
+
+sudo npm install -g node-red-node-beaglebone
+
+sudo npm install -g node-red-node-serialport
+(serial port /dev/ttyO0)
+
+sudo npm install -g node-red-contrib-ledmatrix
+
+sudo npm install -g node-red-contrib-moment
+npm install https://github.com/TotallyInformation/node-red-contrib-moment/tarball/master
+moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
+(Please add it inside moment node)
+
+mosquitto_pub -t topic -m 'hi'
+
+sudo node-red-pi -u /home/debian/.node-red/  
+(ps -ax | grep node)
+(kill -9 60778) (to kill process of extra nodes)
+
+1) http://www.element14.com/community/community/designcenter/single-board-computers/next-gen_beaglebone/blog/2015/07/16/ti-cc2650stk-simplelink-iot-sensortag--node-red-on-beaglebone-black
+
+2) http://nodered.org/docs/getting-started/adding-nodes.html
+
+3) http://flows.nodered.org/node/node-red-node-beaglebone
+
+4) http://nodered.org/docs/hardware/beagleboneblack.html
+
+
+Boot Access:
+
+1) crontab -e
+@reboot /root/node_red.sh
+@reboot /root/inet.sh
+
+
+2) chmod a+x node_red.sh
+
+3) update-rc.d cron defaults
+
+4) reboot
+
